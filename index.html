@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lease2Buy Solutions | Rent-to-Own Homes in Savannah, GA</title>
+<style>
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:'Poppins',sans-serif;color:#222;background:#fff;overflow-x:hidden;}
+header{background:#0d1b2a;color:#fff;padding:25px 0;text-align:center;}
+header h1{margin:0;font-size:2.2em;letter-spacing:1px;}
+header p{margin:0;font-style:italic;color:#f9d342;}
+nav{background:#142d4c;text-align:center;padding:10px;position:sticky;top:0;z-index:999;}
+nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:600;transition:color .3s;}
+nav a:hover{color:#f9d342;}
+.hero{position:relative;height:80vh;background:url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;}
+.hero::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);}
+.hero h2,.hero p,.hero a{position:relative;z-index:2;}
+.hero h2{font-size:2.8em;margin-bottom:10px;text-shadow:1px 1px 4px #000;}
+.hero p{font-size:1.2em;text-shadow:1px 1px 3px #000;}
+.btn{display:inline-block;background:#f9d342;color:#000;padding:12px 25px;margin-top:20px;border-radius:6px;text-decoration:none;font-weight:700;transition:all .3s;}
+.btn:hover{background:#fff;color:#142d4c;transform:scale(1.05);}
+section{padding:70px 20px;max-width:1100px;margin:auto;opacity:0;transform:translateY(30px);transition:all 1s ease;}
+section.visible{opacity:1;transform:translateY(0);}
+.title{text-align:center;font-size:2em;color:#142d4c;margin-bottom:25px;}
+.intro-text{font-size:1.15em;line-height:1.7em;text-align:center;max-width:850px;margin:0 auto 40px auto;color:#333;}
+.process-step{background:#f3f3f3;border-radius:10px;padding:25px;margin-bottom:20px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+.process-step h3{color:#142d4c;}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;}
+.property{border:1px solid #ddd;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:transform .4s;background:#fff;}
+.property:hover{transform:translateY(-6px);}
+.property img.main-photo{width:100%;height:200px;object-fit:cover;display:block;}
+.property .info{padding:15px;}
+.property h4{margin:0;color:#142d4c;}
+.map{margin-top:40px;text-align:center;}
+form{max-width:600px;margin:auto;background:#f3f3f3;padding:25px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+input,textarea{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;font-size:1em;}
+button{background:#142d4c;color:#fff;border:none;padding:12px 20px;font-weight:700;border-radius:6px;cursor:pointer;transition:all .3s;}
+button:hover{background:#f9d342;color:#000;transform:scale(1.05);}
+footer{background:#0d1b2a;color:#fff;text-align:center;padding:25px 10px;font-size:.9em;margin-top:60px;}
+.step{display:none;}
+.step.active{display:block;}
+#thank-you{display:none;text-align:center;}
+#thank-you p{max-width:600px;margin:0 auto 20px;}
+.property-link{display:block;color:inherit;text-decoration:none;}
+.property-link:hover .property{transform:translateY(-6px);}
+
+/* 3-photo preview inside each property card */
+.property .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px;}
+.property .thumbs img{width:100%;height:72px;object-fit:cover;border-radius:8px;display:block;}
+
+/* HOME PHOTO GALLERIES (used in modal + sections) */
+.home-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:25px 0;}
+.home-photos img{width:100%;height:220px;object-fit:cover;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.12);}
+
+/* MODAL */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.72);z-index:2000;padding:18px;}
+.modal.open{display:flex;}
+.modal-card{background:#fff;border-radius:12px;max-width:980px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,0.35);overflow:hidden;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eee;}
+.modal-head h3{margin:0;color:#142d4c;font-size:1.25em;}
+.modal-close{border:none;background:#142d4c;color:#fff;font-weight:700;border-radius:8px;padding:10px 14px;cursor:pointer;}
+.modal-close:hover{background:#f9d342;color:#000;}
+.modal-body{padding:18px;}
+.modal-meta{color:#333;margin:0 0 10px 0;line-height:1.4;}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+
+/* MODAL TABS + MAP */
+.modal-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px;}
+.tab-btn{border:1px solid #ddd;background:#fff;color:#142d4c;font-weight:800;border-radius:999px;padding:10px 14px;cursor:pointer;}
+.tab-btn.active{background:#142d4c;color:#fff;border-color:#142d4c;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.map-frame{width:100%;height:340px;border:0;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.12);}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lease2Buy Solutions</h1>
+  <p>Integrity in Every Transaction</p>
+</header>
+
+<nav>
+  <a href="#process">Buyers</a>
+  <a href="#about">About Us</a>
+  <a href="#properties">Available Homes</a>
+  <a href="#sellers">For Sellers</a>
+  <a href="#get-alerts">Get Alerts</a>
+  <a href="#contact">Contact</a>
+  <a href="#learn-more">Learn More</a>
+</nav>
+
+<div class="hero">
+  <h2>Find Your Rent-to-Own Home in Savannah</h2>
+  <p>Build equity while living in the home you’ll one day own.</p>
+  <a href="#process" class="btn">Learn How It Works</a>
+</div>
+
+<section id="process">
+  <h2 class="title">Your Path to Homeownership</h2>
+  <p class="intro-text">
+    Our Rent-to-Own program lets you move into a home now and buy it later once financing is ready.
+  </p>
+  <div class="process-step"><h3>1. Choose Your Home</h3><p>Pick from our available homes that qualify for lease-option.</p></div>
+  <div class="process-step"><h3>2. Lease Option Agreement</h3><p>We agree on monthly payment, term, and future purchase price in writing.</p></div>
+  <div class="process-step"><h3>3. Build Credit & Savings</h3><p>Use your lease term to strengthen your credit and down payment.</p></div>
+  <div class="process-step"><h3>4. Purchase When Ready</h3><p>When approved, you complete the purchase and become the owner.</p></div>
+</section>
+
+<section id="about">
+  <h2 class="title">What We Do and How We Do It</h2>
+  <p class="intro-text">
+    We help renters become owners and help sellers move properties faster using structured lease-option plans.
+  </p>
+  <div class="process-step">
+    <h3>Helping Buyers</h3>
+    <p>We connect you with homes you can live in now while preparing to qualify for a mortgage.</p>
+  </div>
+  <div class="process-step">
+    <h3>Helping Sellers</h3>
+    <p>We bring serious tenant-buyers, handle paperwork, and keep you informed at each step.</p>
+  </div>
+  <div class="process-step">
+    <h3>Our Approach</h3>
+    <p>Clear agreements, honest communication, and a focus on win-win results for both sides.</p>
+  </div>
+</section>
+
+<section id="properties">
+  <h2 class="title">Available Homes</h2>
+
+  <div class="gallery">
+    <a href="#properties" class="property-link js-open-home"
+       data-home="#home-oak"
+       data-title="123 Oak Street, Savannah"
+       data-meta="3 Bed • 2 Bath • $1,800/mo"
+       data-address="123 Oak Street, Savannah, GA"
+       data-img1="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80"
+       data-img2="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80"
+       data-img3="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80">
+      <div class="property">
+        <img class="main-photo" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="123 Oak Street exterior">
+        <div class="thumbs">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="Oak photo 1">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80" alt="Oak photo 2">
+          <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" alt="Oak photo 3">
+        </div>
+        <div class="info"><h4>123 Oak Street, Savannah</h4><p>3 Bed • 2 Bath • $1,800/mo</p></div>
+      </div>
+    </a>
+
+    <a href="#properties" class="property-link js-open-home"
+       data-home="#home-willow"
+       data-title="58 Willow Court, Pooler"
+       data-meta="4 Bed • 2.5 Bath • $2,100/mo"
+       data-address="58 Willow Court, Pooler, GA"
+       data-img1="https://images.unsplash.com/photo-1572120360610-d971b9b78825?auto=format&fit=crop&w=1200&q=80"
+       data-img2="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80"
+       data-img3="https://images.unsplash.com/photo-1505691723518-36a5ac3b2c74?auto=format&fit=crop&w=1200&q=80">
+      <div class="property">
+        <img class="main-photo" src="https://images.unsplash.com/photo-1572120360610-d971b9b78825?auto=format&fit=crop&w=1200&q=80" alt="58 Willow Court exterior">
+        <div class="thumbs">
+          <img src="https://images.unsplash.com/photo-1572120360610-d971b9b78825?auto=format&fit=crop&w=1200&q=80" alt="Willow photo 1">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80" alt="Willow photo 2">
+          <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2c74?auto=format&fit=crop&w=1200&q=80" alt="Willow photo 3">
+        </div>
+        <div class="info"><h4>58 Willow Court, Pooler</h4><p>4 Bed • 2.5 Bath • $2,100/mo</p></div>
+      </div>
+    </a>
+
+    <a href="#properties" class="property-link js-open-home"
+       data-home="#home-pine"
+       data-title="904 Pine Haven, Richmond Hill"
+       data-meta="3 Bed • 2 Bath • $1,950/mo"
+       data-address="904 Pine Haven, Richmond Hill, GA"
+       data-img1="https://images.unsplash.com/photo-1560184897-45a6c3b4e5cc?auto=format&fit=crop&w=1200&q=80"
+       data-img2="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=80"
+       data-img3="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80">
+      <div class="property">
+        <img class="main-photo" src="https://images.unsplash.com/photo-1560184897-45a6c3b4e5cc?auto=format&fit=crop&w=1200&q=80" alt="904 Pine Haven exterior">
+        <div class="thumbs">
+          <img src="https://images.unsplash.com/photo-1560184897-45a6c3b4e5cc?auto=format&fit=crop&w=1200&q=80" alt="Pine photo 1">
+          <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=80" alt="Pine photo 2">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" alt="Pine photo 3">
+        </div>
+        <div class="info"><h4>904 Pine Haven, Richmond Hill</h4><p>3 Bed • 2 Bath • $1,950/mo</p></div>
+      </div>
+    </a>
+  </div>
+
+  <div style="margin-top:40px;" id="credit-app">
+    <h3 class="title">Lease Option Credit Application</h3>
+    <p class="intro-text">Use this multi-step form to start your lease-option approval. You can give brief answers for now.</p>
+
+    <form id="creditAppForm" action="https://formspree.io/f/xwpwgbjj" method="POST">
+      <input type="hidden" name="_subject" value="New Lease2Buy Credit Application">
+      <input type="hidden" name="_message" value="New lease-option credit application submitted from website.">
+
+      <div class="step active" data-step="1">
+        <h3>Step 1: Basic Contact Info</h3>
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <button type="button" id="next1">Next ›</button>
+      </div>
+
+      <div class="step" data-step="2">
+        <h3>Step 2: Income & Job</h3>
+        <input type="text" name="monthly_income" placeholder="Approx. Monthly Household Income" required>
+        <input type="text" name="employment_time" placeholder="Time at Current Job (e.g. 2 years)" required>
+        <textarea name="employment_details" rows="4" placeholder="Extra details about your job or income (optional)"></textarea>
+        <button type="button" id="back2">‹ Back</button>
+        <button type="button" id="next2">Next ›</button>
+      </div>
+
+      <div class="step" data-step="3">
+        <h3>Step 3: Credit & Home Preferences</h3>
+        <textarea name="credit_situation" rows="4" placeholder="Describe your credit situation (late payments, collections, bankruptcy, etc.)" required></textarea>
+        <textarea name="home_preferences" rows="4" placeholder="Desired areas, bedrooms, payment range, and anything else we should know." required></textarea>
+        <button type="button" id="back3">‹ Back</button>
+        <button type="submit">Submit Application</button>
+      </div>
+    </form>
+  </div>
+
+  <section id="thank-you">
+    <h2 class="title">Thank You!</h2>
+    <p>Your lease-option credit application has been sent. We will review it and reach out by phone or email.</p>
+    <p>You can continue browsing homes below or return to the top of the page.</p>
+    <a href="#properties" class="btn">Back to Available Homes</a>
+  </section>
+
+  <div class="map">
+    <h3>Find Our Homes on the Map</h3>
+    <iframe width="100%" height="350" style="border:0"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3425.640254382393!2d-81.0998!3d32.0835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88fb9f9b5be5b16b%3A0x7fbd5029b9fa46a!2sSavannah%2C%20GA!5e0!3m2!1sen!2sus!4v1730386600000">
+    </iframe>
+  </div>
+</section>
+
+<section id="home-oak">
+  <h2 class="title">123 Oak Street, Savannah</h2>
+  <p class="intro-text">3 bedroom, 2 bath home on a quiet street, offered on a lease-option basis.</p>
+
+  <div class="home-photos">
+    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="Oak Street exterior">
+    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80" alt="Oak Street living room">
+    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" alt="Oak Street kitchen">
+  </div>
+
+  <div class="process-step">
+    <h3>Home Highlights</h3>
+    <ul>
+      <li>3 Bedrooms / 2 Bathrooms</li>
+      <li>Approx. 1,600 sq ft</li>
+      <li>Fenced yard and off-street parking</li>
+      <li>Monthly payment: around $1,800 (subject to approval)</li>
+    </ul>
+  </div>
+  <a href="#credit-app" class="btn">Apply for This Home</a>
+  <a href="#properties" class="btn" style="margin-left:10px;">Back to Homes</a>
+</section>
+
+<section id="home-willow">
+  <h2 class="title">58 Willow Court, Pooler</h2>
+  <p class="intro-text">4 bedroom, 2.5 bath home with open floor plan and modern finishes.</p>
+
+  <div class="home-photos">
+    <img src="https://images.unsplash.com/photo-1572120360610-d971b9b78825?auto=format&fit=crop&w=1200&q=80" alt="Willow Court exterior">
+    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80" alt="Willow Court interior">
+    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2c74?auto=format&fit=crop&w=1200&q=80" alt="Willow Court bedroom">
+  </div>
+
+  <div class="process-step">
+    <h3>Home Highlights</h3>
+    <ul>
+      <li>4 Bedrooms / 2.5 Bathrooms</li>
+      <li>Approx. 2,100 sq ft</li>
+      <li>Open kitchen and living area</li>
+      <li>Monthly payment: around $2,100 (subject to approval)</li>
+    </ul>
+  </div>
+  <a href="#credit-app" class="btn">Apply for This Home</a>
+  <a href="#properties" class="btn" style="margin-left:10px;">Back to Homes</a>
+</section>
+
+<section id="home-pine">
+  <h2 class="title">904 Pine Haven, Richmond Hill</h2>
+  <p class="intro-text">3 bedroom, 2 bath home in a desirable school district.</p>
+
+  <div class="home-photos">
+    <img src="https://images.unsplash.com/photo-1560184897-45a6c3b4e5cc?auto=format&fit=crop&w=1200&q=80" alt="Pine Haven exterior">
+    <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=80" alt="Pine Haven living area">
+    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80" alt="Pine Haven kitchen">
+  </div>
+
+  <div class="process-step">
+    <h3>Home Highlights</h3>
+    <ul>
+      <li>3 Bedrooms / 2 Bathrooms</li>
+      <li>Approx. 1,700 sq ft</li>
+      <li>Close to shopping and schools</li>
+      <li>Monthly payment: around $1,950 (subject to approval)</li>
+    </ul>
+  </div>
+  <a href="#credit-app" class="btn">Apply for This Home</a>
+  <a href="#properties" class="btn" style="margin-left:10px;">Back to Homes</a>
+</section>
+
+<section id="sellers">
+  <h2 class="title">For Sellers</h2>
+  <p class="intro-text">
+    If your property isn’t moving the traditional way, we can help you create a steady income stream while lining up a future buyer.
+  </p>
+  <div class="process-step">
+    <h3>How We Help Sellers</h3>
+    <p>We bring motivated tenant-buyers who treat your home like their own, pay monthly, and aim to buy at the end of the term.</p>
+  </div>
+</section>
+
+<section id="learn-more">
+  <h2 class="title">Learn More About Our Lease Option Program</h2>
+  <div class="process-step">
+    <h3>Who It's For</h3>
+    <p>Great for buyers with stable income who need time to fix credit or save more down payment.</p>
+  </div>
+  <div class="process-step">
+    <h3>Steps</h3>
+    <ul>
+      <li>Select a qualifying home.</li>
+      <li>Agree on rent, term, and future price.</li>
+      <li>Lease while repairing credit and saving.</li>
+      <li>Purchase when your lender approves you.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="get-alerts">
+  <h2 class="title">Get Alerts</h2>
+  <p class="intro-text">Get an email when we add new lease-option homes.</p>
+  <form action="https://formspree.io/f/xwpwgbjj" method="POST">
+    <input type="hidden" name="_subject" value="New Get Alerts Signup">
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<section id="contact">
+  <h2 class="title">Contact Us</h2>
+  <p class="intro-text">Ask about homes, selling, or how our program works.</p>
+  <form action="https://formspree.io/f/xwpwgbjj" method="POST">
+    <input type="hidden" name="_subject" value="New Contact Message from Lease2Buy Site">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="text" name="phone" placeholder="Phone Number" required>
+    <textarea name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 Lease2Buy Solutions | Integrity in Every Transaction | Savannah, GA
+</footer>
+
+<!-- PROPERTY MODAL -->
+<div class="modal" id="propertyModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h3 id="modalTitle">Home Details</h3>
+      <button class="modal-close" id="modalClose" type="button">Close</button>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-meta" id="modalMeta"></p>
+
+      <div class="modal-tabs" role="tablist" aria-label="Home details tabs">
+        <button type="button" class="tab-btn active" data-tab="photos">Photos</button>
+        <button type="button" class="tab-btn" data-tab="directions">Map & Directions</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="photos">
+        <div class="home-photos" id="modalPhotos"></div>
+      </div>
+
+      <div class="tab-panel" data-panel="directions">
+        <iframe class="map-frame" id="modalMap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="modal-actions" style="margin-top:14px;">
+          <a href="#" class="btn" id="modalDirections" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <a href="#credit-app" class="btn" id="modalApply">Apply Now</a>
+        <a href="#properties" class="btn" id="modalBackHomes">Back to Homes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// reveal on scroll
+const sections=document.querySelectorAll('section');
+const showOnScroll=()=>{sections.forEach(sec=>{const rect=sec.getBoundingClientRect();if(rect.top<window.innerHeight-100){sec.classList.add('visible');}});};
+window.addEventListener('scroll',showOnScroll);showOnScroll();
+
+// smooth scroll helper (accounts for sticky nav)
+function scrollToAnchor(hash){
+  const el=document.querySelector(hash);
+  if(!el) return;
+  const nav=document.querySelector('nav');
+  const offset=(nav?nav.offsetHeight:0)+12;
+  const y=el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top:y,behavior:'smooth'});
+  history.pushState(null,'',hash);
+}
+
+// multi-step credit form
+const form=document.getElementById('creditAppForm');
+const steps=form.querySelectorAll('.step');
+const next1=document.getElementById('next1');
+const next2=document.getElementById('next2');
+const back2=document.getElementById('back2');
+const back3=document.getElementById('back3');
+const thankYou=document.getElementById('thank-you');
+const creditAppBlock=document.getElementById('credit-app');
+
+function showStep(n){
+  steps.forEach(s=>s.classList.remove('active'));
+  const step=form.querySelector('.step[data-step="'+n+'"]');
+  if(step){step.classList.add('active');}
+}
+next1.addEventListener('click',()=>showStep(2));
+next2.addEventListener('click',()=>showStep(3));
+back2.addEventListener('click',()=>showStep(1));
+back3.addEventListener('click',()=>showStep(2));
+
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const data=new FormData(form);
+  fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
+    .then(res=>{
+      if(res.ok){
+        creditAppBlock.style.display='none';
+        thankYou.style.display='block';
+        scrollToAnchor('#thank-you');
+        form.reset();
+        showStep(1);
+      }else{
+        alert('There was an issue sending your application. Please try again.');
+      }
+    })
+    .catch(()=>alert('Network error. Please try again.'));
+});
+
+// click "Available Homes" cards -> modal with photos + map + directions
+const modal=document.getElementById('propertyModal');
+const modalClose=document.getElementById('modalClose');
+const modalTitle=document.getElementById('modalTitle');
+const modalMeta=document.getElementById('modalMeta');
+const modalPhotos=document.getElementById('modalPhotos');
+const modalMap=document.getElementById('modalMap');
+const modalDirections=document.getElementById('modalDirections');
+
+function setActiveTab(tabName){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tabName));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.dataset.panel===tabName));
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>setActiveTab(btn.dataset.tab));
+});
+
+function openModal({title, meta, imgs=[], address=''}){
+  modalTitle.textContent=title || 'Home Details';
+  modalMeta.textContent=meta || '';
+
+  // photos
+  modalPhotos.innerHTML='';
+  imgs.filter(Boolean).forEach((src,i)=>{
+    const img=document.createElement('img');
+    img.src=src;
+    img.alt=(title?title+' photo ':'Home photo ') + (i+1);
+    modalPhotos.appendChild(img);
+  });
+
+  // map + directions (no API key needed)
+  const safeAddr=(address || title || '').trim();
+  const enc=encodeURIComponent(safeAddr);
+  modalMap.src = safeAddr ? `https://www.google.com/maps?q=${enc}&output=embed` : '';
+  modalDirections.href = safeAddr ? `https://www.google.com/maps/dir/?api=1&destination=${enc}` : '#';
+
+  // open modal
+  setActiveTab('photos');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+}
+
+function closeModal(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+}
+
+document.querySelectorAll('.js-open-home').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    openModal({
+      title: link.dataset.title,
+      meta: link.dataset.meta,
+      address: link.dataset.address || '',
+      imgs: [link.dataset.img1, link.dataset.img2, link.dataset.img3]
+    });
+  });
+});
+
+// FIX: modal buttons now close the modal and scroll to the right section
+document.getElementById('modalApply').addEventListener('click',e=>{
+  e.preventDefault();
+  closeModal();
+  setTimeout(()=>scrollToAnchor('#credit-app'),0);
+});
+document.getElementById('modalBackHomes').addEventListener('click',e=>{
+  e.preventDefault();
+  closeModal();
+  setTimeout(()=>scrollToAnchor('#properties'),0);
+});
+
+modalClose.addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+// optional: make nav anchors use offset scrolling too
+document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const hash=a.getAttribute('href');
+    if(!hash || hash==='#') return;
+    e.preventDefault();
+    scrollToAnchor(hash);
+  });
+});
+</script>
+
+</body>
+</html>
