@@ -8,44 +8,81 @@
 <style>
 html{scroll-behavior:smooth;}
 body{margin:0;font-family:'Poppins',sans-serif;color:#222;background:#fff;overflow-x:hidden;}
-header{background:#0d1b2a;color:#fff;padding:25px 0;text-align:center;}
+
+/* HEADER */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
+  padding:25px 0;
+  background:#0d1b2a;
+  color:#fff;
+  text-align:center;
+}
 header h1{margin:0;font-size:2.2em;}
 header p{margin:0;font-style:italic;color:#f9d342;}
+
+/* NAV */
 nav{background:#142d4c;text-align:center;padding:10px;position:sticky;top:0;z-index:999;}
 nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:600;}
 nav a:hover{color:#f9d342;}
-.hero {
-  position: relative;
-  height: 70vh;
-  background: url('something') center/cover no-repeat;
+
+/* HERO */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  height:70vh;
+  padding:20px;
 }
+.hero h2{font-size:2em;color:#142d4c;}
+.hero p{max-width:600px;margin:auto;}
+
+/* SECTIONS */
 section{padding:70px 20px;max-width:1100px;margin:auto;}
 .title{text-align:center;font-size:2em;color:#142d4c;margin-bottom:25px;}
 .intro-text{text-align:center;max-width:850px;margin:0 auto 40px auto;}
 .process-step{background:#f3f3f3;border-radius:10px;padding:25px;margin-bottom:20px;}
+
+/* FORMS */
 form{max-width:600px;margin:auto;background:#f3f3f3;padding:25px;border-radius:10px;}
 input,textarea,select{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:6px;}
-button,.btn{background:#142d4c;color:#fff;border:none;padding:12px 20px;font-weight:700;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+
+/* BUTTONS (CENTERED) */
+button,.btn{
+  background:#142d4c;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  font-weight:700;
+  border-radius:6px;
+  cursor:pointer;
+  text-decoration:none;
+  display:block;
+  margin:30px auto;
+  text-align:center;
+}
 button:hover,.btn:hover{background:#f9d342;color:#000;}
+
 .step{display:none;}
 .step.active{display:block;}
 #thank-you{display:none;text-align:center;margin-top:30px;}
+
+/* FOOTER */
 footer{background:#0d1b2a;color:#fff;text-align:center;padding:25px 10px;margin-top:60px;}
 </style>
 </head>
 
 <body>
- <header style="display:flex; align-items:center; justify-content:center; gap:15px; padding:20px;">
-  <img src="logo.png" alt="Lease2Buy Solutions Logo" style="width:100px;">
-  <div>
-    
-  </div>
-</header>
-</div>
 
 <header>
-<h1>Lease2Buy Solutions</h1>
-<p>Integrity in Every Transaction</p>
+  <img src="logo.png" alt="Lease2Buy Solutions Logo" style="width:90px;">
+  <div>
+    <h1>Lease2Buy Solutions</h1>
+    <p>Integrity in Every Transaction</p>
+  </div>
 </header>
 
 <nav>
@@ -55,12 +92,11 @@ footer{background:#0d1b2a;color:#fff;text-align:center;padding:25px 10px;margin-
 </nav>
 
 <div class="hero">
-<div>
-<h2>Structured Path to Homeownership in Savannah</h2>
-<p>We connect qualified buyers with lease-purchase opportunities before they hit the open market.</p>
-<br>
-<a href="#credit-app" class="btn">Join Priority Buyer List</a>
-</div>
+  <div>
+    <h2>Structured Path to Homeownership in Savannah</h2>
+    <p>We connect qualified buyers with lease-purchase opportunities before they hit the open market.</p>
+    <a href="#credit-app" class="btn">Join Priority Buyer List</a>
+  </div>
 </div>
 
 <section id="homes-coming">
@@ -99,22 +135,19 @@ Many of our buyers start with <strong>$3,000 – $5,000 down</strong> and work t
 </ul>
 </div>
 
-<div style="text-align:center;margin-top:30px;">
 <a href="#credit-app" class="btn">Join the Priority Buyer List</a>
-</div>
 </section>
 
 <section id="credit-app">
 <h2 class="title">Buyer Pre-Qualification Form</h2>
 
 <p class="intro-text">
-This is not a rental application. Our structured homeownership program typically requires a down payment between <strong>$3,000 – $10,000+</strong>, depending on the home and terms.
+This is not a rental application. Our structured homeownership program typically requires a down payment between <strong>$3,000 – $10,000+</strong>.
 <br><br>
 👉 <strong>Don’t have the full amount yet? Still apply. We may have flexible options available.</strong>
 </p>
 
 <form id="creditAppForm" action="https://formspree.io/f/xwpwgbjj" method="POST">
-<input type="hidden" name="_subject" value="New Buyer Pre-Qualification Submission">
 
 <div class="step active" data-step="1">
 <h3>Step 1: Contact & Funds</h3>
@@ -128,7 +161,7 @@ This is not a rental application. Our structured homeownership program typically
 <div class="step" data-step="2">
 <h3>Step 2: Income & Credit</h3>
 <input type="text" name="monthly_income" placeholder="Monthly Income" required>
-<input type="text" name="monthly_debts" placeholder="Total Monthly Debt Payments (car, credit cards, loans, etc.)" required>
+<input type="text" name="monthly_debts" placeholder="Monthly Debts" required>
 <input type="text" name="employment_time" placeholder="Time at Job" required>
 <select name="credit_score_range" required>
 <option value="">Credit Score Range</option>
@@ -144,41 +177,30 @@ This is not a rental application. Our structured homeownership program typically
 <div class="step" data-step="3">
 <h3>Step 3: Timeline</h3>
 <select name="financing_timeline" required>
-<option value="">When do you expect to qualify?</option>
+<option value="">Timeline</option>
 <option>Within 6 months</option>
 <option>Within 12 months</option>
 <option>12–18 months</option>
 <option>18–24 months</option>
 </select>
 
-<textarea name="home_preferences" rows="4" placeholder="Preferred areas, bedrooms, payment range." required></textarea>
-
-<label style="display:block;margin-bottom:10px;">
-<input type="checkbox" name="proof_of_funds_acknowledgment" required>
-I understand proof of down payment funds may be required prior to touring properties.
-</label>
-
-<label style="display:block;margin-bottom:20px;">
-<input type="checkbox" name="disclaimer_acknowledgment" required>
-I understand Lease2Buy Solutions, LLC does not provide mortgage financing and approval is not guaranteed.
-</label>
+<textarea name="home_preferences" rows="4" placeholder="Preferences" required></textarea>
 
 <button type="button" id="back3">‹ Back</button>
-<button type="submit">Submit Pre-Qualification</button>
+<button type="submit">Submit</button>
 </div>
 
 </form>
 
 <div id="thank-you">
 <h3>Thank You!</h3>
-<p>Your submission has been received. We will contact you shortly.</p>
+<p>We will contact you shortly.</p>
 </div>
 </section>
 
 <section id="contact">
 <h2 class="title">Contact Us</h2>
 <form action="https://formspree.io/f/xwpwgbjj" method="POST">
-<input type="hidden" name="_subject" value="New Contact Message">
 <input type="text" name="name" placeholder="Full Name" required>
 <input type="email" name="email" placeholder="Email Address" required>
 <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
@@ -213,9 +235,9 @@ if(res.ok){
 form.style.display='none';
 document.getElementById('thank-you').style.display='block';
 }else{
-alert("Submission error. Please try again.");
+alert("Submission error.");
 }
-}).catch(()=>alert("Network error."));
+});
 });
 </script>
 
