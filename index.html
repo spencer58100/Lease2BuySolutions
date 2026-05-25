@@ -509,18 +509,330 @@ mortgage balances.
 </div>
 
 </section>
+<!-- SELLER FORM -->
 
-<!-- KEEP REST OF YOUR ORIGINAL HTML BELOW EXACTLY AS BEFORE -->
-
-<!-- IMPORTANT:
-PASTE EVERYTHING FROM:
 <section id="seller-form">
-ALL THE WAY DOWN TO:
-</html>
 
-FROM YOUR CURRENT FILE DIRECTLY BELOW THIS COMMENT
-WITHOUT CHANGING ANYTHING ELSE.
--->
+<h2 class="title">Seller Property Information Form</h2>
+
+<p class="intro-text">
+Fill out the short form below and we will review your property to see if
+we may be a fit for one of our structured purchase programs.
+<br><br>
+There is absolutely no obligation.
+</p>
+
+<form action="https://formspree.io/f/xwpwgbjj" method="POST">
+
+<input type="hidden" name="submission_type" value="Seller Lead">
+
+<input type="text"
+name="seller_name"
+placeholder="Full Name"
+required>
+
+<input type="email"
+name="seller_email"
+placeholder="Email Address"
+required>
+
+<input type="text"
+name="seller_phone"
+placeholder="Phone Number"
+required>
+
+<input type="text"
+name="property_address"
+placeholder="Property Address"
+required>
+
+<input type="text"
+name="asking_price"
+placeholder="Desired Price">
+
+<input type="text"
+name="monthly_payment"
+placeholder="Current Monthly Mortgage Payment (if applicable)">
+
+<select name="property_condition">
+
+<option value="">Property Condition</option>
+<option>Excellent</option>
+<option>Good</option>
+<option>Needs Minor Repairs</option>
+<option>Needs Major Repairs</option>
+
+</select>
+
+<select name="timeline">
+
+<option value="">How Soon Are You Looking To Sell?</option>
+<option>ASAP</option>
+<option>30 Days</option>
+<option>60-90 Days</option>
+<option>Just Exploring Options</option>
+
+</select>
+
+<textarea
+name="seller_notes"
+rows="5"
+placeholder="Tell us about the property or situation">
+</textarea>
+
+<button type="submit">
+Submit Property Information
+</button>
+
+</form>
+
+</section>
+
+<!-- HOMES COMING SOON -->
+
+<section id="homes-coming">
+
+<h2 class="title">Homes Coming Soon</h2>
+
+<p class="intro-text">
+We are actively securing lease-purchase homes in Savannah, Pooler,
+and surrounding areas.
+
+Our pre-qualified buyers receive priority access before homes are publicly released.
+</p>
+
+<p style="text-align:center;font-weight:600;color:#142d4c;">
+We currently have qualified buyers waiting for the right properties.
+</p>
+
+<p style="text-align:center;margin-top:10px;color:#333;">
+Many of our buyers start with
+<strong>$3,000 – $5,000 down</strong>
+and work toward full mortgage approval within 6–18 months.
+</p>
+
+<div class="process-step">
+
+<h3>How It Works</h3>
+
+<ul>
+<li>✔ We pre-qualify serious buyers first.</li>
+<li>✔ We structure purchase terms with sellers.</li>
+<li>✔ Approved buyers are notified before homes are advertised.</li>
+<li>✔ Down payment funds (typically $3,000 – $10,000+) are required and applied toward purchase.</li>
+</ul>
+
+</div>
+
+<div class="process-step">
+
+<h3>Current Buyer Criteria</h3>
+
+<ul>
+<li>Minimum down payment funds available</li>
+<li>Stable employment history</li>
+<li>Target mortgage readiness within 6-12 months</li>
+<li>Savannah, Pooler, Richmond Hill areas</li>
+</ul>
+
+</div>
+
+<a href="#credit-app" class="btn">
+Join the Priority Buyer List
+</a>
+
+</section>
+
+<!-- BUYER APPLICATION -->
+
+<section id="credit-app">
+
+<h2 class="title">Buyer Pre-Qualification Form</h2>
+
+<p class="intro-text">
+
+This is not a rental application.
+
+Our structured homeownership program typically requires a down payment between
+<strong>$3,000 – $10,000+</strong>.
+
+<br><br>
+
+👉 <strong>
+Don’t have the full amount yet?
+Still apply. We may have flexible options available.
+</strong>
+
+</p>
+
+<form id="creditAppForm"
+action="https://formspree.io/f/xwpwgbjj"
+method="POST">
+
+<div class="step active" data-step="1">
+
+<h3>Step 1: Contact & Funds</h3>
+
+<input type="text"
+name="full_name"
+placeholder="Full Name"
+required>
+
+<input type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<input type="text"
+name="phone"
+placeholder="Phone Number"
+required>
+
+<input type="text"
+name="down_payment_saved"
+placeholder="How much saved for down payment?"
+required>
+
+<button type="button" id="next1">
+Next ›
+</button>
+
+</div>
+
+<div class="step" data-step="2">
+
+<h3>Step 2: Income & Credit</h3>
+
+<input type="text"
+name="monthly_income"
+placeholder="Monthly Income"
+required>
+
+<input type="text"
+name="monthly_debts"
+placeholder="Monthly Debts"
+required>
+
+<input type="text"
+name="employment_time"
+placeholder="Time at Job"
+required>
+
+<select name="credit_score_range" required>
+
+<option value="">Credit Score Range</option>
+<option>Below 580</option>
+<option>580–620</option>
+<option>620–680</option>
+<option>680+</option>
+
+</select>
+
+<button type="button" id="back2">
+‹ Back
+</button>
+
+<button type="button" id="next2">
+Next ›
+</button>
+
+</div>
+
+<div class="step" data-step="3">
+
+<h3>Step 3: Timeline</h3>
+
+<select name="financing_timeline" required>
+
+<option value="">Timeline</option>
+<option>Within 6 months</option>
+<option>Within 12 months</option>
+<option>12–18 months</option>
+<option>18–24 months</option>
+
+</select>
+
+<textarea
+name="home_preferences"
+rows="4"
+placeholder="Preferences"
+required>
+</textarea>
+
+<button type="button" id="back3">
+‹ Back
+</button>
+
+<button type="submit">
+Submit
+</button>
+
+</div>
+
+</form>
+
+<div id="thank-you">
+
+<h3>Thank You!</h3>
+
+<p>
+We will contact you shortly.
+</p>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2 class="title">Contact Us</h2>
+
+<p style="
+text-align:center;
+font-size:1.15em;
+margin-bottom:25px;
+color:#142d4c;
+font-weight:600;
+">
+
+Call or Text Us:
+<strong>(912) 661-9449</strong>
+
+</p>
+
+<form action="https://formspree.io/f/xwpwgbjj" method="POST">
+
+<input type="text"
+name="name"
+placeholder="Full Name"
+required>
+
+<input type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<textarea
+name="message"
+rows="4"
+placeholder="Your Message"
+required>
+</textarea>
+
+<button type="submit">
+Send Message
+</button>
+
+</form>
+
+</section>
+
+<footer>
+© 2026 Lease2Buy Solutions | Savannah, GA
+</footer>
+
 
 <script>
 
